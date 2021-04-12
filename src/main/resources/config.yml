@@ -1,0 +1,51 @@
+# COMMAND: opplayercmd, playercmd, consolecmd, message, title(title;subtitle), broadcast, sound(sound;f1;f2)
+# VALUE:
+#   STRING: '*' = all, 'and;v1;v2;v3' = v1 && v2 && v3, 'or;v1;v2;v3' = v1 || v2 || v3
+#   NUMBER: '> 0' = > 0, the same logic with <, >=, <=
+# PLACEHOLDERS:
+#    - %quest_name%
+#    - %quest_desc%
+#    - %quest_points%
+#    - %data_stage_count%
+#    - %stage_objective%
+#    - %stage_tip%
+#    - %stage_count%
+#    - %stage_data_<data>% ex: %stage_data_npcid%
+on-quest-start-commands:
+  - '{0} [consolecmd] bc %player% started quest %quest_name%'
+on-quest-finish-commands: []
+on-quest-cancel-commands: []
+
+category:
+  main:
+    name: Nhiệm vụ chính quyến
+    cooldown:
+      enable: false
+    random:
+      enable: false
+    list:
+      - main1
+      - main2
+      - main3
+      - main4
+  daily:
+    name: Nhiệm vụ hằng ngày
+    cooldown:
+      enable: true
+      type: DAILY
+    random:
+      enable: true
+      amount: 2
+    list:
+      - daily1
+      - daily2
+      - daily3
+      - daily4
+
+featherboard:
+  enable: true
+  board: quest
+  quests:
+    - q1
+    - q2
+    - q3

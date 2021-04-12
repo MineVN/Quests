@@ -1,0 +1,37 @@
+name: Simple example quest
+desc: Duong ve nha la vao tim ta
+reward-desc:
+  - '+ 100 Tokens'
+  - '+ 200,000 Exp'
+# Can remove if you did't want to set
+requirement-desc: Can hoan thanh q1 hoac q2 va lam sau ngay 10/10/2020
+requirements:
+  0:
+    type: QUEST_DONE
+    value: 'or;q1;q2'
+  1:
+    type: DATE
+    value: '> 10/10/2020'
+reward-commands:
+  - '{5} [consolecmd] bc %player% got the rewards of %quest_name%'
+stages:
+  0:
+    type: SHOPS_ITEM_DELIVER
+    objective: Đưa x10 Than cho Soragari
+    tip: Đây là một cái hướng dẫn quest
+    count: 10
+    data:
+      item-id: 'coal3'
+      npc-id: '> 3'
+    on-count-added-commands: []
+    on-start-commands:
+      - '{5} [consolecmd] bc %player% starts stage 0'
+    # End = Cancel or Finish
+    on-end-commands:
+      - '{5} [consolecmd] bc %player% fails stage 0'
+  1:
+    type: SORA_ITEM_ENHANCE
+    objective: Cường hóa vũ khí đạt cấp 5
+    count: 1
+    data:
+      enhance-level: '>= 5'

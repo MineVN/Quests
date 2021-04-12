@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Quests:jar">
+    <output-path>$PROJECT_DIR$/../../../../Minecraft/Server/1.16 Test/plugins</output-path>
+    <root id="archive" name="Quests.jar">
+      <element id="module-output" name="Quests" />
+    </root>
+  </artifact>
+</component>

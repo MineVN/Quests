@@ -1,0 +1,20 @@
+name: Quests
+version: 1.0
+api-version: 1.16
+main: me.manaki.plugin.quests.Quests
+depend:
+  - PlayerData
+softdepend:
+  - Shops
+  - Dungeons
+  - Crafts
+  - SantoryCore
+  - Citizens
+  - PlaceholderAPI
+commands:
+  quests:
+    description: Quests's command
+    aliases: [q]
+  questboard:
+    description: Board
+    aliases: [bangnhiemvu]

@@ -1,0 +1,66 @@
+package me.manaki.plugin.quests.placeholder;
+
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import me.manaki.plugin.quests.Quests;
+import me.manaki.plugin.quests.quest.Quest;
+import me.manaki.plugin.quests.quester.Questers;
+import mk.plugin.santory.utils.Utils;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class QuestPlaceholder extends PlaceholderExpansion {
+
+
+    @Override
+    public String getIdentifier() {
+        return "quests";
+    }
+
+    @Override
+    public String getAuthor() {
+        return "MankaiStep";
+    }
+
+    @Override
+    public String getVersion() {
+        return "1.0";
+    }
+
+    // %mainquest_name%, %mainquest_stage%, %mainquest_objective_1%, %mainquest_objective_2%
+    @Override
+    public String onPlaceholderRequest(Player player, String s){
+        String mainQuest = null;
+        var quester = Questers.get(player.getName());
+        for (String id : quester.getCurrentQuests().keySet()) {
+            if (Quests.get().getConfigManager().getFeatherboardQuests().contains(id)) mainQuest = id;
+        }
+        if (mainQuest == null) return "No main quest";
+
+        var quest = Quests.get().getConfigManager().getQuest(mainQuest);
+        var data = quester.getCurrentQuests().get(mainQuest);
+        var stage = Quests.get().getQuestManager().getCurrentStage(player, mainQuest);
+        var objective = stage.getObjective();
+
+        if (s.equalsIgnoreCase("main_quest_name")) {
+            return quest.getName();
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_stage")) {
+            return data.getStage() + "/" + quest.getStages().size();
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_objective_1")) {
+            List<String> os = Utils.toList(objective, 30, "");
+            return os.get(0);
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_objective_2")) {
+            List<String> os = Utils.toList(objective, 23, "");
+            return os.size() > 1 ? os.get(1) : "";
+        }
+
+        return "Wrong placeholder";
+    }
+
+}
