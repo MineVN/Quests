@@ -43,7 +43,7 @@ public class Quests extends JavaPlugin {
 
         // Listener
         var pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new PlayerListener(this), this);
         pm.registerEvents(new GUIListener(this), this);
         pm.registerEvents(new ConversationListener(this), this);
         if (pm.isPluginEnabled("Shops")) pm.registerEvents(new ShopListener(this), this);
@@ -57,6 +57,11 @@ public class Quests extends JavaPlugin {
 
         // Placeholder
         new QuestPlaceholder().register();
+
+        // Check wrong quests
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            this.getQuestManager().checkWrongQuests(player);
+        }
     }
 
     @Override

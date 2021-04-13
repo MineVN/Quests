@@ -64,6 +64,10 @@ public class Quester {
         this.currentQuests = currentQuests;
     }
 
+    public void removeCurrent(String id) {
+        this.currentQuests.remove(id);
+    }
+
     public boolean addCurrentQuest(String questID, boolean override) {
         if (this.currentQuests.containsKey(questID) && !override) return false;
         this.currentQuests.put(questID, new QuestData(questID));

@@ -27,6 +27,10 @@ public class QuestManager {
         var quester = Questers.get(player.getName());
         if (!quester.getCurrentQuests().containsKey(questID)) return null;
         var quest = plugin.getConfigManager().getQuest(questID);
+        if (quest == null) {
+            System.out.println("§cQuest id " + questID + " of " + player.getName() + " is null");
+            return null;
+        }
         int stageIndex = quester.getCurrentQuests().get(questID).getStage();
         return quest.getStages().get(stageIndex);
     }
@@ -220,6 +224,18 @@ public class QuestManager {
         }
 
         return QuestStatus.CANT_REDO;
+    }
+
+    public void checkWrongQuests(Player player) {
+        var quester = Questers.get(player.getName());
+        boolean change = false;
+        for (String id : quester.getCurrentQuests().keySet()) {
+            if (plugin.getConfigManager().getQuest(id) == null) {
+                quester.removeCurrent(id);
+                change = true;
+            }
+        }
+        if (change) Questers.save(player.getName());
     }
 
 }

@@ -7,7 +7,7 @@ public enum ValueType {
         public boolean compare(String source, Object... objects) {
             if (source.equalsIgnoreCase("*")) return true;
             if (!source.contains(";")) {
-                return source.equals(objects[0]);
+                return source.equalsIgnoreCase(objects[0].toString());
             }
             String[] a = source.split(";");
             String type = a[0];

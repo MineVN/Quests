@@ -36,6 +36,7 @@ Last update: 13/04/2021
 - SORA_ITEM_CRAFT
     + recipe-level: Number type
 - SHOPS_ITEM_DELIVER
+    + count: amount
     + item-id: Number type
     + npc-id: Number type
 - CONVERSATION
@@ -88,3 +89,13 @@ Last update: 13/04/2021
 - %quests_main_quest_objective_2%
 - %quests_main_quest_tip_1%
 - %quests_main_quest_tip_2%
+
+**Stage
+- type
+- objective
+- tip
+- count
+- data
+- on-count-added-commands
+- on-start-commands
+- on-end-commands
