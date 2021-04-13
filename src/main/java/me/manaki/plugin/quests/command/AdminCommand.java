@@ -78,7 +78,7 @@ public class AdminCommand implements CommandExecutor {
                     var player = Bukkit.getPlayer(args[2]);
                     var quester = Questers.get(player.getName());
                     List<String> quests = Lists.newArrayList(quester.getCurrentQuests().keySet());
-                    plugin.getGUIManager().open(player, quests, "§0§lNHIỆM VỤ ĐANG LÀM", 1);
+                    plugin.getGUIManager().open(player, quests, "§0§lNHIỆM VỤ ĐANG LÀM", 1, true);
                 }
                 else if (args[1].equalsIgnoreCase("category")) {
                     var id = args[2];

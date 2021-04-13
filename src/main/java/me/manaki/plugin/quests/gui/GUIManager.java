@@ -29,7 +29,11 @@ public class GUIManager {
     }
 
     public void open(Player player, List<String> quests, String title, int page) {
-        var holder = new GUIHolder(quests, title, page);
+        open(player, quests, title, page, false);
+    }
+
+    public void open(Player player, List<String> quests, String title, int page, boolean isCurrent) {
+        var holder = new GUIHolder(quests, title, page, isCurrent);
         int maxPage = getMaxPage(quests.size());
         var inv = Bukkit.createInventory(holder, 27, title + " [" + page + "/" + maxPage + "]");
         player.openInventory(inv);
@@ -83,7 +87,11 @@ public class GUIManager {
             }
             else if (status == QuestStatus.IN_PROGRESS && e.getClick() == ClickType.SHIFT_LEFT) {
                 plugin.getQuestManager().cancelQuest(player, questID);
-                open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage());
+                if (!holder.isCurrent()) open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage());
+                else {
+                    holder.getQuests().remove(questID);
+                    open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage(), true);
+                }
             }
         }
     }

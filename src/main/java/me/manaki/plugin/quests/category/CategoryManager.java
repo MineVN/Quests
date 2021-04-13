@@ -34,17 +34,17 @@ public class CategoryManager {
             int year = Integer.parseInt(v.split("/")[2]);
             date = LocalDate.of(year, month, day);
         }
-        else date = LocalDate.now();
 
         // Dont need to do anything
-        if (lastTime != null && lastTime.isEqual(date)) return;
+        if (lastTime.isEqual(LocalDate.now())) return;
 
         // Need get from data
-        if (globaldata.hasData("quests-last-time") && lastTime == null && LocalDate.now().isEqual(date)) {
+        if (date != null && globaldata.hasData("quests-last-time") && !this.lastTime.equals(LocalDate.now()) && date.isEqual(LocalDate.now())) {
             for (String key : plugin.getConfigManager().getCategories().keySet()) {
                 var datakey = "quests-avaiable-" + key;
                 if (globaldata.hasData(datakey)) availables.put(key, Utils.from(globaldata.getValue(datakey), ";"));
             }
+            this.lastTime = LocalDate.now();
             return;
         }
 
