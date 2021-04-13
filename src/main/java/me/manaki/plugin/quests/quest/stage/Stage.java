@@ -1,7 +1,5 @@
 package me.manaki.plugin.quests.quest.stage;
 
-import com.google.common.collect.Lists;
-import me.manaki.plugin.quests.Quests;
 import me.manaki.plugin.quests.utils.command.Command;
 import me.manaki.plugin.quests.utils.data.DataValue;
 import org.bukkit.entity.Player;

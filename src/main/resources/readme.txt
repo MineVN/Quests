@@ -1,5 +1,49 @@
 Last update: 13/04/2021
 
+**Available requirement types:
+- QUEST_DONE
+    + Value: String type
+- DATE
+    + Value: Date type (dd/mm/yyyy - allow comparison)
+    + Example: > 20/10/2020
+- LEVEL
+    + Value: Number type
+
+**Available stage types:
+- PLACEHOLDER_CHANGE
+    + *count: added value
+    + *placeholder: String type
+- DUNGEON_FINISH
+    + count: times
+    + dungeon-id: String type
+    + result: String type
+    + mem-start: Number type
+    + mem-finish: Number type
+    + mob-kills: Number type
+    + slave-saves: Number type
+    + death-times: Number type
+    + play-time: Number type
+- DUNGEON_MOB_KILL
+    + count: amount
+    + dungeon-id: String type
+    + mob-id: String type
+- SORA_ITEM_ASCENT
+    + ascent-level: Number type
+- SORA_ITEM_ENHANCE
+    + enhance-level: Number type
+- SORA_ITEM_UPGRADE
+    + upgrade-level: Number type
+- SORA_ITEM_CRAFT
+    + recipe-level: Number type
+- SHOPS_ITEM_DELIVER
+    + item-id: Number type
+    + npc-id: Number type
+- CONVERSATION
+    + count: amount
+    + npc-id: Number type
+    + c-0 -> c-(amount-1): Conversation
+
+
 **Available command types:
 - opplayercmd
     + Example: {5} [opplayercmd] tell Hello
@@ -27,7 +71,7 @@ Last update: 13/04/2021
 - %stage_count%
 - %stage_data_<data>% ex: %stage_data_npcid%
 
-**Value
+**Value types
 - String type:
     + *: all
     + and;v1;v2;v3: v1 and v2
@@ -37,10 +81,10 @@ Last update: 13/04/2021
     + >0: >0
     + <, <=, >= are similar as >
 
-*PlaceholderAPI
-%quests_main_quest_name%
-%quests_main_quest_stage%
-%quests_main_quest_objective_1%
-%quests_main_quest_objective_2%
-%quests_main_quest_tip_1%
-%quests_main_quest_tip_2%
+**PlaceholderAPI
+- %quests_main_quest_name%
+- %quests_main_quest_stage%
+- %quests_main_quest_objective_1%
+- %quests_main_quest_objective_2%
+- %quests_main_quest_tip_1%
+- %quests_main_quest_tip_2%

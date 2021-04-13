@@ -7,10 +7,7 @@ import me.manaki.plugin.quests.config.ConfigManager;
 import me.manaki.plugin.quests.gui.GUIManager;
 import me.manaki.plugin.quests.listener.GUIListener;
 import me.manaki.plugin.quests.listener.PlayerListener;
-import me.manaki.plugin.quests.listener.hook.CraftListener;
-import me.manaki.plugin.quests.listener.hook.DungeonListener;
-import me.manaki.plugin.quests.listener.hook.SantoryListener;
-import me.manaki.plugin.quests.listener.hook.ShopListener;
+import me.manaki.plugin.quests.listener.hook.*;
 import me.manaki.plugin.quests.placeholder.QuestPlaceholder;
 import me.manaki.plugin.quests.quest.QuestManager;
 import me.manaki.plugin.quests.category.CategoryManager;
@@ -30,8 +27,6 @@ public class Quests extends JavaPlugin {
     private GUIManager guiManager;
     private BoardManager boardManager;
 
-    private PluginManager pluginManager;
-
     @Override
     public void onEnable() {
         // Config
@@ -40,7 +35,6 @@ public class Quests extends JavaPlugin {
         this.categoryManager = new CategoryManager(this);
         this.guiManager = new GUIManager(this);
         this.boardManager = new BoardManager(this);
-        this.pluginManager = Bukkit.getPluginManager();
         this.configManager.reload();
 
         // Command
@@ -48,16 +42,18 @@ public class Quests extends JavaPlugin {
         this.getCommand("questboard").setExecutor(new PlayerCommand(this));
 
         // Listener
-        pluginManager.registerEvents(new PlayerListener(), this);
-        pluginManager.registerEvents(new GUIListener(this), this);
-        if (pluginManager.isPluginEnabled("Shops")) pluginManager.registerEvents(new ShopListener(this), this);
-        if (pluginManager.isPluginEnabled("SantoryCore")) pluginManager.registerEvents(new SantoryListener(this), this);
-        if (pluginManager.isPluginEnabled("Dungeons")) pluginManager.registerEvents(new DungeonListener(this), this);
-        if (pluginManager.isPluginEnabled("Crafts")) pluginManager.registerEvents(new CraftListener(this), this);
+        var pm = Bukkit.getPluginManager();
+        pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new GUIListener(this), this);
+        pm.registerEvents(new ConversationListener(this), this);
+        if (pm.isPluginEnabled("Shops")) pm.registerEvents(new ShopListener(this), this);
+        if (pm.isPluginEnabled("SantoryCore")) pm.registerEvents(new SantoryListener(this), this);
+        if (pm.isPluginEnabled("Dungeons")) pm.registerEvents(new DungeonListener(this), this);
+        if (pm.isPluginEnabled("Crafts")) pm.registerEvents(new CraftListener(this), this);
 
         // Task
         new QuestTask(this).runTaskTimerAsynchronously(this, 0, 20);
-        if (pluginManager.isPluginEnabled("PlaceholderAPI")) new PlaceholderTask(this).runTaskTimer(this, 0, 20);
+        if (pm.isPluginEnabled("PlaceholderAPI")) new PlaceholderTask(this).runTaskTimer(this, 0, 20);
 
         // Placeholder
         new QuestPlaceholder().register();

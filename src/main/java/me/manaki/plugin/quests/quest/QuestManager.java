@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
 public class QuestManager {
 
@@ -171,15 +172,15 @@ public class QuestManager {
         map.put("%player%", player.getName());
 
         if (quest != null) {
-            map.put("%quest_name%", quest.getName());
-            map.put("%quest_desc%", quest.getDesc());
+            map.put("%quest_name%", Objects.requireNonNullElse(quest.getName(), ""));
+            map.put("%quest_desc%", Objects.requireNonNullElse(quest.getDesc(), ""));
             map.put("%quest_points%", quester.getQuestPoints() + "");
             if (data != null) {
                 map.put("%data_stage_count%", data.getStageCount() + "");
                 var stage = getCurrentStage(player, questID);
                 if (stage != null) {
-                    map.put("%stage_objective%", stage.getObjective() + "");
-                    map.put("%stage_tip%", stage.getTip());
+                    map.put("%stage_objective%", Objects.requireNonNullElse(stage.getObjective(), ""));
+                    map.put("%stage_tip%", Objects.requireNonNullElse(stage.getTip(), ""));
                     map.put("%stage_count%", stage.getCount() + "");
                     for (Map.Entry<String, String> e : stage.getData().entrySet()) {
                         map.put("%stage_data_" + e.getKey().replace("-", "") + "%", e.getValue());

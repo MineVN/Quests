@@ -188,7 +188,31 @@ public enum StageType {
         public void onEnd(Player player, int count, Map<String, String> data) {
 
         }
-    };
+    },
+    CONVERSATION {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("npc-id", ValueType.NUMBER);
+            for (int i = 0 ; i < 50 ; i++) {
+                m.put("c-" + i, ValueType.STRING);
+            }
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    }
+
+    ;
 
     public abstract Map<String, ValueType> getDefaultDataModel();
     public abstract void onStart(Player player, int count, Map<String, String> data);
