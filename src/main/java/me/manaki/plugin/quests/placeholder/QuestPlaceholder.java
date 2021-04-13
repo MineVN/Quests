@@ -41,6 +41,7 @@ public class QuestPlaceholder extends PlaceholderExpansion {
         var data = quester.getCurrentQuests().get(mainQuest);
         var stage = Quests.get().getQuestManager().getCurrentStage(player, mainQuest);
         var objective = stage.getObjective();
+        var tip = stage.getTip();
 
         if (s.equalsIgnoreCase("main_quest_name")) {
             return quest.getName();
@@ -57,6 +58,16 @@ public class QuestPlaceholder extends PlaceholderExpansion {
 
         else if (s.equalsIgnoreCase("main_quest_objective_2")) {
             List<String> os = Utils.toList(objective, 23, "");
+            return os.size() > 1 ? os.get(1) : "";
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_tip_1")) {
+            List<String> os = Utils.toList(tip, 30, "");
+            return os.get(0);
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_tip_2")) {
+            List<String> os = Utils.toList(tip, 23, "");
             return os.size() > 1 ? os.get(1) : "";
         }
 

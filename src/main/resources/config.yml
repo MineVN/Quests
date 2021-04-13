@@ -1,16 +1,3 @@
-# COMMAND: opplayercmd, playercmd, consolecmd, message, title(title;subtitle), broadcast, sound(sound;f1;f2)
-# VALUE:
-#   STRING: '*' = all, 'and;v1;v2;v3' = v1 && v2 && v3, 'or;v1;v2;v3' = v1 || v2 || v3
-#   NUMBER: '> 0' = > 0, the same logic with <, >=, <=
-# PLACEHOLDERS:
-#    - %quest_name%
-#    - %quest_desc%
-#    - %quest_points%
-#    - %data_stage_count%
-#    - %stage_objective%
-#    - %stage_tip%
-#    - %stage_count%
-#    - %stage_data_<data>% ex: %stage_data_npcid%
 on-quest-start-commands:
   - '{0} [consolecmd] bc %player% started quest %quest_name%'
 on-quest-finish-commands: []

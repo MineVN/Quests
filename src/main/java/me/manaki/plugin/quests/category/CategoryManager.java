@@ -1,4 +1,4 @@
-package me.manaki.plugin.quests.quest.category;
+package me.manaki.plugin.quests.category;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -62,7 +62,6 @@ public class CategoryManager {
         }
         this.lastTime = LocalDate.now();
         save();
-        plugin.getLogger().info("Generated and saved new categories!");
     }
 
     public void generate() {

@@ -7,8 +7,8 @@ import me.manaki.plugin.quests.quest.requirement.Requirement;
 import me.manaki.plugin.quests.quest.requirement.RequirementType;
 import me.manaki.plugin.quests.quest.stage.Stage;
 import me.manaki.plugin.quests.quest.stage.StageType;
-import me.manaki.plugin.quests.quest.category.Category;
-import me.manaki.plugin.quests.quest.category.CooldownType;
+import me.manaki.plugin.quests.category.Category;
+import me.manaki.plugin.quests.category.CooldownType;
 import me.manaki.plugin.quests.utils.command.Command;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -47,6 +47,7 @@ public class ConfigManager {
         plugin.saveDefaultConfig();
         pluginConfig = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config.yml"));
         checkDefaultConfig();
+        loadReadme();
 
         // Check folder
         var folder = new File(plugin.getDataFolder() + "//quests");
@@ -85,6 +86,16 @@ public class ConfigManager {
             featherboardAutoEnables = pluginConfig.getStringList("featherboard.quests");
         }
 
+    }
+
+    private void loadReadme() {
+        var is = plugin.getResource("readme.txt");
+        var file = new File(plugin.getDataFolder(), "readme.txt");
+        try {
+            FileUtils.copyInputStreamToFile(is, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Quest getQuest(String id) {

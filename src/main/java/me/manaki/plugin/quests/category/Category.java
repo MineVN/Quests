@@ -1,4 +1,4 @@
-package me.manaki.plugin.quests.quest.category;
+package me.manaki.plugin.quests.category;
 
 
 import java.util.List;
