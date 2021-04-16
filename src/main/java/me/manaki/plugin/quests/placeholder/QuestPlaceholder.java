@@ -62,11 +62,17 @@ public class QuestPlaceholder extends PlaceholderExpansion {
         }
 
         else if (s.equalsIgnoreCase("main_quest_tip_1")) {
+            if (tip == null) {
+                return "Nhiệm vụ này không có";
+            }
             List<String> os = Utils.toList(tip, 30, "");
             return os.get(0);
         }
 
         else if (s.equalsIgnoreCase("main_quest_tip_2")) {
+            if (tip == null) {
+                return "gợi ý";
+            }
             List<String> os = Utils.toList(tip, 23, "");
             return os.size() > 1 ? os.get(1) : "";
         }
