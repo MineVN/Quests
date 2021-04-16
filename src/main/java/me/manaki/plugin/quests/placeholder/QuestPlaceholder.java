@@ -35,7 +35,7 @@ public class QuestPlaceholder extends PlaceholderExpansion {
         for (String id : quester.getCurrentQuests().keySet()) {
             if (Quests.get().getConfigManager().getFeatherboardQuests().contains(id)) mainQuest = id;
         }
-        if (mainQuest == null) return "No main quest";
+        if (mainQuest == null) return "Không có";
 
         var quest = Quests.get().getConfigManager().getQuest(mainQuest);
         var data = quester.getCurrentQuests().get(mainQuest);
