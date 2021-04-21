@@ -35,10 +35,10 @@ public class QuestManager {
         return quest.getStages().get(stageIndex);
     }
 
-    public boolean give(Player player, String questID, boolean override) {
+    public void give(Player player, String questID, boolean override) {
         var quester = Questers.get(player.getName());
         var success = quester.addCurrentQuest(questID, override);
-        if (!success) return false;
+        if (!success) return;
 
         // Start commands
         for (Command cmd : plugin.getConfigManager().getOnQuestStartCommands()) cmd.execute(player, getPlaceholders(player, questID));
@@ -50,7 +50,6 @@ public class QuestManager {
             plugin.getBoardManager().openBoard(player, 7, true);
         }
 
-        return true;
     }
 
     /*

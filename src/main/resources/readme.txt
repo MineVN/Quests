@@ -1,4 +1,28 @@
-Last update: 13/04/2021
+Last update: 21/04/2021
+
+**Quest
+- name
+- desc
+- reward-desc
+- reward-commands
+- requirement-desc
+- requirements
+- stages
+
+**Requirement
+- QUEST_DONE
+- DATE
+- LEVEL
+
+**Stage
+- type
+- objective
+- tip
+- count
+- data
+- on-count-added-commands
+- on-start-commands
+- on-end-commands
 
 **Available requirement types:
 - QUEST_DONE
@@ -43,6 +67,13 @@ Last update: 13/04/2021
     + count: amount
     + npc-id: Number type
     + c-0 -> c-(amount-1): Conversation
+- SORA_WISH
+    + wish: String type
+- LOCATION_REACH
+    + location: String type (world;x;y;z)
+    + radius: Number type
+- COMMAND_EXECUTE
+    + command: String type
 
 
 **Available command types:
@@ -89,13 +120,3 @@ Last update: 13/04/2021
 - %quests_main_quest_objective_2%
 - %quests_main_quest_tip_1%
 - %quests_main_quest_tip_2%
-
-**Stage
-- type
-- objective
-- tip
-- count
-- data
-- on-count-added-commands
-- on-start-commands
-- on-end-commands

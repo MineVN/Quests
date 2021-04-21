@@ -210,7 +210,69 @@ public enum StageType {
         public void onEnd(Player player, int count, Map<String, String> data) {
 
         }
+    },
+
+    SORA_WISH {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("wish", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
+
+    LOCATION_REACH {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("warp", ValueType.STRING);
+            m.put("radius", ValueType.NUMBER);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
+
+    COMMAND_EXECUTE {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("command", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
     }
+
 
     ;
 

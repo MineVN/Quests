@@ -5,6 +5,7 @@ import me.manaki.plugin.quests.quest.stage.StageType;
 import mk.plugin.santory.event.PlayerItemAscentEvent;
 import mk.plugin.santory.event.PlayerItemEnhanceEvent;
 import mk.plugin.santory.event.PlayerItemUpgradeEvent;
+import mk.plugin.santory.event.PlayerWishRollEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -16,6 +17,14 @@ public class SantoryListener implements Listener {
 
     public SantoryListener(Quests plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onWish(PlayerWishRollEvent e) {
+        var player = e.getPlayer();
+        var id = e.getWishID();
+        Map<String, Object> values = Map.of("wish", id);
+        plugin.getQuestManager().addCount(player, StageType.SORA_WISH, values, 1);
     }
 
     @EventHandler
