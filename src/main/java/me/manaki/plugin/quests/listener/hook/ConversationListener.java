@@ -35,7 +35,7 @@ public class ConversationListener implements Listener {
 
             var cid = "c-" + data.getStageCount();
             if (stage.getData().containsKey(cid)) {
-                var message = stage.getData().get(cid).replace("&", "§");
+                var message = stage.getData().get(cid).replace("&", "§").replace("%player%", player.getName());
                 player.sendMessage("");
                 player.sendMessage("§a§l[" + (data.getStageCount() + 1) + "/" + stage.getCount() + "] " + message);
                 player.sendMessage("");

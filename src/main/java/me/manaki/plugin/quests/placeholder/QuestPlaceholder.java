@@ -52,7 +52,7 @@ public class QuestPlaceholder extends PlaceholderExpansion {
         }
 
         else if (s.equalsIgnoreCase("main_quest_objective_1")) {
-            List<String> os = Utils.toList(objective, 30, "");
+            List<String> os = Utils.toList(objective, 23, "");
             return os.get(0);
         }
 
@@ -61,11 +61,16 @@ public class QuestPlaceholder extends PlaceholderExpansion {
             return os.size() > 1 ? os.get(1) : "";
         }
 
+        else if (s.equalsIgnoreCase("main_quest_objective_3")) {
+            List<String> os = Utils.toList(objective, 23, "");
+            return os.size() > 2 ? os.get(2) : "";
+        }
+
         else if (s.equalsIgnoreCase("main_quest_tip_1")) {
             if (tip == null) {
                 return "Nhiệm vụ này không có";
             }
-            List<String> os = Utils.toList(tip, 30, "");
+            List<String> os = Utils.toList(tip, 23, "");
             return os.get(0);
         }
 
@@ -75,6 +80,14 @@ public class QuestPlaceholder extends PlaceholderExpansion {
             }
             List<String> os = Utils.toList(tip, 23, "");
             return os.size() > 1 ? os.get(1) : "";
+        }
+
+        else if (s.equalsIgnoreCase("main_quest_tip_3")) {
+            if (tip == null) {
+                return "gợi ý";
+            }
+            List<String> os = Utils.toList(tip, 23, "");
+            return os.size() > 2 ? os.get(2) : "";
         }
 
         return "Wrong placeholder";

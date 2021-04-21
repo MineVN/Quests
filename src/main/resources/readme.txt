@@ -58,7 +58,7 @@ Last update: 21/04/2021
 - SORA_ITEM_UPGRADE
     + upgrade-level: Number type
 - SORA_ITEM_CRAFT
-    + recipe-level: Number type
+    + recipe-id: String type
 - SHOPS_ITEM_DELIVER
     + count: amount
     + item-id: Number type

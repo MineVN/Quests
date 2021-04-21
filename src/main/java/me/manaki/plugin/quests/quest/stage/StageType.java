@@ -153,7 +153,7 @@ public enum StageType {
         @Override
         public Map<String, ValueType> getDefaultDataModel() {
             Map<String, ValueType> m = Maps.newLinkedHashMap();
-            m.put("recipe-id", ValueType.NUMBER);
+            m.put("recipe-id", ValueType.STRING);
 
             return m;
         }
