@@ -47,7 +47,7 @@ public class QuestManager {
 
         // Board
         if (plugin.getConfigManager().getFeatherboardQuests().contains(questID)) {
-            plugin.getBoardManager().openBoard(player, 7, true);
+            plugin.getBoardManager().openBoard(player, -1, true);
         }
 
     }
@@ -108,9 +108,18 @@ public class QuestManager {
             data.setStage(data.getStage() + 1);
             data.setStageCount(0);
             stage = getCurrentStage(player, questID);
+            var placeholders = getPlaceholders(player ,questID);
+            placeholders.put("%old_stage%", (data.getStage() - 1) + "");
+            placeholders.put("%new_stage%", data.getStage() + "");
+            placeholders.put("%max_stage%", quest.getStages().size() + "");
 
             // Run start commands
-            stage.onStart(player, getPlaceholders(player, questID));
+            stage.onStart(player, placeholders);
+
+            // Global commands
+            for (Command cmd : plugin.getConfigManager().getOnStageChangeCommands()) {
+                cmd.execute(player, placeholders);
+            }
         }
 
         return Math.max(0, excess);

@@ -1,14 +1,10 @@
 package me.manaki.plugin.quests.quester;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import me.manaki.plugin.quests.utils.Utils;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Quester {
@@ -77,4 +73,5 @@ public class Quester {
     public void setCurrenQuest(String id, QuestData data) {
         currentQuests.put(id, data);
     }
+
 }

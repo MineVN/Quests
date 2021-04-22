@@ -2,7 +2,10 @@ on-quest-start-commands:
   - '{0} [consolecmd] bc %player% started quest %quest_name%'
 on-quest-finish-commands: []
 on-quest-cancel-commands: []
-
+on-stage-change-commands:
+  - '[message] &a[Nhiệm vụ] Hoàn thành giai đoạn &2%old_stage%/%max_stage% !'
+  - '{10} [title] &f;&a&l&oHoàn thành giai đoạn &2%old_stage%/%max_stage%'
+  - '{30} [title] &f;&a&l&oGiai đoạn hiện tại: &2%new_stage%/%max_stage%'
 category:
   main:
     name: Nhiệm vụ chính quyến

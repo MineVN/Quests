@@ -2,9 +2,8 @@ package me.manaki.plugin.quests.placeholder;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.manaki.plugin.quests.Quests;
-import me.manaki.plugin.quests.quest.Quest;
 import me.manaki.plugin.quests.quester.Questers;
-import mk.plugin.santory.utils.Utils;
+import me.manaki.plugin.quests.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.List;

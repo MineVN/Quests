@@ -37,6 +37,7 @@ public class ConfigManager {
     private List<Command> onQuestStartCommands = Lists.newArrayList();
     private List<Command> onQuestFinishCommands = Lists.newArrayList();
     private List<Command> onQuestCancelCommands = Lists.newArrayList();
+    private List<Command> onStageChangeCommands = Lists.newArrayList();
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
@@ -73,6 +74,7 @@ public class ConfigManager {
         onQuestStartCommands = pluginConfig.getStringList("on-quest-start-commands").stream().map(Command::new).collect(Collectors.toList());
         onQuestFinishCommands = pluginConfig.getStringList("on-quest-finish-commands").stream().map(Command::new).collect(Collectors.toList());
         onQuestCancelCommands = pluginConfig.getStringList("on-quest-cancel-commands").stream().map(Command::new).collect(Collectors.toList());
+        onStageChangeCommands = pluginConfig.getStringList("on-stage-change-commands").stream().map(Command::new).collect(Collectors.toList());
 
         // Categories
         categories.clear();
@@ -213,5 +215,8 @@ public class ConfigManager {
         return new Category(name, cooldownEnable, cooldownType, randomEnable, random, list);
     }
 
+    public List<Command> getOnStageChangeCommands() {
+        return onStageChangeCommands;
+    }
 
 }

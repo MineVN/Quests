@@ -33,8 +33,8 @@ public class BoardManager {
         if (message) {
             player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
             player.sendMessage("");
-            player.sendMessage("§aĐã chuyển sang chế độ Bảng Nhiệm vụ, tắt sau " + seconds + " giây");
-            player.sendMessage("§aĐể bật hoặc tắt, ghi: §c/bangnhiemvu");
+            player.sendMessage("§aĐã chuyển sang chế độ Bảng Nhiệm vụ");
+            player.sendMessage("§aGhi: §c/bangnhiemvu §ađể về bảng mặc định, ghi lần nữa để quay trở lại Bảng nhiệm vụ");
             player.sendMessage("");
         }
     }
