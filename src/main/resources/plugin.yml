@@ -15,6 +15,7 @@ commands:
   quests:
     description: Quests's command
     aliases: [q]
+    permission: quests.admin
   questboard:
     description: Board
     aliases: [bangnhiemvu]
