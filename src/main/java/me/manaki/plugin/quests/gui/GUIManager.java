@@ -7,6 +7,7 @@ import me.manaki.plugin.quests.quester.Questers;
 import mk.plugin.santory.utils.Tasks;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -86,6 +87,12 @@ public class GUIManager {
                 open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage());
             }
             else if (status == QuestStatus.IN_PROGRESS && e.getClick() == ClickType.SHIFT_LEFT) {
+                // Check if no quit quests
+                if (plugin.getConfigManager().getNoQuitQuests().contains(questID)) {
+                    player.sendMessage("§cBạn không được phép hủy nhiệm vụ này!");
+                    player.sendMessage("§cNếu cần hủy thì liên hệ Ban quản trị");
+                    return;
+                }
                 plugin.getQuestManager().cancelQuest(player, questID);
                 if (!holder.isCurrent()) open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage());
                 else {

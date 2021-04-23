@@ -6,6 +6,17 @@ on-stage-change-commands:
   - '[message] &a[Nhiệm vụ] Hoàn thành giai đoạn &2%old_stage%/%max_stage% !'
   - '{10} [title] &f;&a&l&oHoàn thành giai đoạn &2%old_stage%/%max_stage%'
   - '{30} [title] &f;&a&l&oGiai đoạn hiện tại: &2%new_stage%/%max_stage%'
+no-quit-quests:
+  - main_1
+  - main_2
+  - main_3
+  - main_4
+  - main_5
+  - main_6
+  - main_7
+  - main_8
+  - main_9
+  - main_10
 category:
   main:
     name: Nhiệm vụ chính quyến

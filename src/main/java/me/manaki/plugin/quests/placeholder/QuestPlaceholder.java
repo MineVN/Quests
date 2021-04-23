@@ -47,7 +47,7 @@ public class QuestPlaceholder extends PlaceholderExpansion {
         }
 
         else if (s.equalsIgnoreCase("main_quest_stage")) {
-            return data.getStage() + "/" + quest.getStages().size();
+            return (data.getStage() + 1) + "/" + quest.getStages().size();
         }
 
         else if (s.equalsIgnoreCase("main_quest_objective_1")) {

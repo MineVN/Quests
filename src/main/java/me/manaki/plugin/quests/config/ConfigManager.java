@@ -18,6 +18,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringBufferInputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,6 +31,8 @@ public class ConfigManager {
     private List<String> featherboardAutoEnables;
 
     private FileConfiguration pluginConfig;
+
+    private List<String> noQuitQuests;
 
     private final Map<String, Quest> quests = Maps.newHashMap();
     private final Map<String, Category> categories = Maps.newHashMap();
@@ -75,6 +78,8 @@ public class ConfigManager {
         onQuestFinishCommands = pluginConfig.getStringList("on-quest-finish-commands").stream().map(Command::new).collect(Collectors.toList());
         onQuestCancelCommands = pluginConfig.getStringList("on-quest-cancel-commands").stream().map(Command::new).collect(Collectors.toList());
         onStageChangeCommands = pluginConfig.getStringList("on-stage-change-commands").stream().map(Command::new).collect(Collectors.toList());
+
+        noQuitQuests = pluginConfig.getStringList("no-quit-quests");
 
         // Categories
         categories.clear();
@@ -219,4 +224,7 @@ public class ConfigManager {
         return onStageChangeCommands;
     }
 
+    public List<String> getNoQuitQuests() {
+        return noQuitQuests;
+    }
 }

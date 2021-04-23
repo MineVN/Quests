@@ -109,8 +109,8 @@ public class QuestManager {
             data.setStageCount(0);
             stage = getCurrentStage(player, questID);
             var placeholders = getPlaceholders(player ,questID);
-            placeholders.put("%old_stage%", (data.getStage() - 1) + "");
-            placeholders.put("%new_stage%", data.getStage() + "");
+            placeholders.put("%old_stage%", data.getStage() + "");
+            placeholders.put("%new_stage%", (data.getStage() + 1) + "");
             placeholders.put("%max_stage%", quest.getStages().size() + "");
 
             // Run start commands

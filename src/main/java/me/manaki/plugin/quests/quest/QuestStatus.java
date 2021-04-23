@@ -29,7 +29,7 @@ public enum QuestStatus {
             var tip = stage.getTip();
 
             meta.setDisplayName("§a§l" + quest.getName());
-            lore.add("§aTiến trình: " + data.getStage() + "/" + quest.getStages().size());
+            lore.add("§aTiến trình: " + (data.getStage() + 1) + "/" + quest.getStages().size());
             lore.add("§aBộ đếm: " + data.getStageCount() + "/" + stage.getCount());
             lore.add("");
             lore.addAll(Utils.toList(objective, 23, "§f§o"));
