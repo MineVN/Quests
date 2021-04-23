@@ -56,6 +56,10 @@ public class Quester {
         this.completedQuests.put(id, Utils.toString(LocalDate.now()));
     }
 
+    public void clearCompletedQuests() {
+        this.completedQuests.clear();
+    }
+
     public void setCurrentQuests(ConcurrentHashMap<String, QuestData> currentQuests) {
         this.currentQuests = currentQuests;
     }

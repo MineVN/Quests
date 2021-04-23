@@ -246,4 +246,14 @@ public class QuestManager {
         if (change) Questers.save(player.getName());
     }
 
+    public void clearData(Player player) {
+        var quester = Questers.get(player.getName());
+        quester.setQuestPoints(0);
+        quester.clearCompletedQuests();
+        for (String qid : quester.getCurrentQuests().keySet()) {
+            cancelQuest(player, qid);
+        }
+        quester.save();
+    }
+
 }

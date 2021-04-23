@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -88,6 +89,13 @@ public class AdminCommand implements CommandExecutor {
                 }
             }
 
+            else if (args[0].equalsIgnoreCase("cleardata")) {
+                var player = Bukkit.getPlayer(args[1]);
+                assert player != null;
+                plugin.getQuestManager().clearData(player);
+                sender.sendMessage("§aCleared!");
+            }
+
         }
         catch (ArrayIndexOutOfBoundsException e) {
             sendHelp(sender);
@@ -105,6 +113,7 @@ public class AdminCommand implements CommandExecutor {
         sender.sendMessage("§e/quests give <*id> <*player> <*override>");
         sender.sendMessage("§e/quests cancel <*id> <*player>");
         sender.sendMessage("§e/quests finish <*id> <*player>");
+        sender.sendMessage("§e/quests cleardata <*player>");
         sender.sendMessage("§e/quests category reset");
         sender.sendMessage("§e/quests gui current <*player>");
         sender.sendMessage("§e/quests gui category <*id> <*player>");
