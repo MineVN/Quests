@@ -19,7 +19,7 @@ public enum RequirementType {
         public boolean check(Player player, String v) {
             var quester = Questers.get(player.getName());
             if (quester == null) return false;
-            return new DataValue(this.getDefault().getType(), v).compare(quester.getCompletedQuests());
+            return new DataValue(this.getDefault().getType(), v).compare(quester.getCompletedQuests().keySet());
         }
     },
     DATE {

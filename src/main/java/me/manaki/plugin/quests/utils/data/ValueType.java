@@ -1,16 +1,36 @@
 package me.manaki.plugin.quests.utils.data;
 
+import com.google.common.collect.Lists;
+import com.google.gson.stream.JsonToken;
+import org.apache.logging.log4j.core.appender.routing.Route;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 public enum ValueType {
 
     STRING {
         @Override
         public boolean compare(String source, Object... objects) {
             if (source.equalsIgnoreCase("*")) return true;
+            String[] a = source.split(";");
+            String type = a[0];
+
+            // List
+            System.out.println(objects[0].getClass().getName());
+            if (objects.length == 1 && objects[0] instanceof Collection) {
+                var list = (Collection<String>) objects[0];
+                for (String s : a) {
+                    if (!list.contains(s)) return false;
+                }
+                return true;
+            }
+
             if (!source.contains(";")) {
                 return source.equalsIgnoreCase(objects[0].toString());
             }
-            String[] a = source.split(";");
-            String type = a[0];
 
             // AND
             if (type.equals("and")) {
