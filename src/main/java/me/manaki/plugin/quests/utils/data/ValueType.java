@@ -19,7 +19,6 @@ public enum ValueType {
             String type = a[0];
 
             // List
-            System.out.println(objects[0].getClass().getName());
             if (objects.length == 1 && objects[0] instanceof Collection) {
                 var list = (Collection<String>) objects[0];
                 for (String s : a) {
