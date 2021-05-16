@@ -27,6 +27,8 @@ public class Quests extends JavaPlugin {
     private GUIManager guiManager;
     private BoardManager boardManager;
 
+    private boolean isLoaded;
+
     @Override
     public void onEnable() {
         // Config
@@ -46,14 +48,12 @@ public class Quests extends JavaPlugin {
         pm.registerEvents(new PlayerListener(this), this);
         pm.registerEvents(new GUIListener(this), this);
         pm.registerEvents(new ConversationListener(this), this);
-        if (pm.isPluginEnabled("Shops")) pm.registerEvents(new ShopListener(this), this);
-        if (pm.isPluginEnabled("SantoryCore")) pm.registerEvents(new SantoryListener(this), this);
-        if (pm.isPluginEnabled("Dungeons")) pm.registerEvents(new DungeonListener(this), this);
-        if (pm.isPluginEnabled("Crafts")) pm.registerEvents(new CraftListener(this), this);
 
-        // Task
-        new QuestTask(this).runTaskTimerAsynchronously(this, 0, 20);
-        if (pm.isPluginEnabled("PlaceholderAPI")) new PlaceholderTask(this).runTaskTimer(this, 0, 20);
+        // Check if has player >> load
+        if (Bukkit.getOnlinePlayers().size() > 0) {
+            this.isLoaded = true;
+            load();
+        }
 
         // Placeholder
         new QuestPlaceholder().register();
@@ -62,6 +62,18 @@ public class Quests extends JavaPlugin {
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.getQuestManager().checkWrongQuests(player);
         }
+    }
+
+    public void load() {
+        var pm = Bukkit.getPluginManager();
+        if (pm.isPluginEnabled("Shops")) pm.registerEvents(new ShopListener(this), this);
+        if (pm.isPluginEnabled("SantoryCore")) pm.registerEvents(new SantoryListener(this), this);
+        if (pm.isPluginEnabled("Dungeons")) pm.registerEvents(new DungeonListener(this), this);
+        if (pm.isPluginEnabled("Crafts")) pm.registerEvents(new CraftListener(this), this);
+
+        // Task
+        new QuestTask(this).runTaskTimerAsynchronously(this, 0, 20);
+        if (pm.isPluginEnabled("PlaceholderAPI")) new PlaceholderTask(this).runTaskTimer(this, 0, 20);
     }
 
     @Override
@@ -95,4 +107,11 @@ public class Quests extends JavaPlugin {
         return JavaPlugin.getPlugin(Quests.class);
     }
 
+    public boolean isLoaded() {
+        return isLoaded;
+    }
+
+    public void setLoaded(boolean value) {
+        this.isLoaded = value;
+    }
 }
