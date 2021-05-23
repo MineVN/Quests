@@ -28,8 +28,9 @@ public class PlayerListener implements Listener {
             plugin.load();
         }
         var player = e.getPlayer();
-        Tasks.async(() -> {
+        Tasks.sync(() -> {
             plugin.getQuestManager().checkWrongQuests(player);
+            plugin.getQuestManager().checkExpiredQuests(player);
         }, 50);
     }
 

@@ -11,6 +11,7 @@ import me.manaki.plugin.quests.utils.Utils;
 import me.manaki.plugin.quests.utils.command.Command;
 import org.bukkit.entity.Player;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
@@ -246,6 +247,28 @@ public class QuestManager {
         if (change) Questers.save(player.getName());
     }
 
+    public void checkExpiredQuests(Player player) {
+        var quester = Questers.get(player.getName());
+        boolean change = false;
+        int count = 0;
+        for (String id : quester.getCurrentQuests().keySet()) {
+            var q = plugin.getConfigManager().getQuest(id);
+            var data = quester.getCurrentQuests().get(id);
+            var cs = plugin.getCategoryManager().getCategory(id);
+            var category = plugin.getConfigManager().getCategory(cs);
+            if (category == null || category.getCooldown() == null) continue;
+
+            // Expired
+            if (category.getCooldown().enough(LocalDate.now(), new Timestamp(data.getTakeTime()).toLocalDateTime().toLocalDate())) {
+                quester.getCurrentQuests().remove(id);
+                change = true;
+                count++;
+            }
+        }
+        if (count > 0) player.sendMessage("§c§oĐã hủy " + count + " nhiệm vụ vì quá hạn thời gian làm!");
+        if (change) Questers.save(player.getName());
+    }
+
     public void clearData(Player player) {
         var quester = Questers.get(player.getName());
         quester.setQuestPoints(0);
@@ -255,5 +278,6 @@ public class QuestManager {
         }
         quester.save();
     }
+
 
 }
