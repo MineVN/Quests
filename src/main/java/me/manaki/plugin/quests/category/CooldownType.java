@@ -8,19 +8,19 @@ public enum CooldownType {
     DAILY {
         @Override
         public boolean enough(LocalDate d1, LocalDate d2) {
-            return ChronoUnit.DAYS.between(d1, d2) >= 1;
+            return Math.abs(ChronoUnit.DAYS.between(d1, d2)) >= 1;
         }
     },
     WEEKLY{
         @Override
         public boolean enough(LocalDate d1, LocalDate d2) {
-            return ChronoUnit.DAYS.between(d1, d2) >= 7;
+            return Math.abs(ChronoUnit.DAYS.between(d1, d2)) >= 7;
         }
     },
     MONTHLY{
         @Override
         public boolean enough(LocalDate d1, LocalDate d2) {
-            return ChronoUnit.MONTHS.between(d1, d2) >= 1;
+            return Math.abs(ChronoUnit.MONTHS.between(d1, d2)) >= 1;
         }
     };
 

@@ -16,16 +16,21 @@ import java.util.Map;
 public class PlayerListener implements Listener {
 
     private final Quests plugin;
-
     public PlayerListener(Quests plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
+        // First join load
+        if (!plugin.isLoaded()) {
+            plugin.setLoaded(true);
+            plugin.load();
+        }
         var player = e.getPlayer();
-        Tasks.async(() -> {
+        Tasks.sync(() -> {
             plugin.getQuestManager().checkWrongQuests(player);
+            plugin.getQuestManager().checkExpiredQuests(player);
         }, 50);
     }
 

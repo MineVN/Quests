@@ -24,6 +24,11 @@ public class ConversationListener implements Listener {
     public void onDeliver(NPCRightClickEvent e) {
         var player = e.getClicker();
         var npcid = e.getNPC().getId();
+        
+        // Add count
+        Map<String, Object> values = Map.of("npc-id", npcid);
+        int excess = plugin.getQuestManager().addCount(player, StageType.CONVERSATION, values, 1);
+        if (excess == -1) return;
 
         // Talk
         var quester = Questers.get(player.getName());
@@ -33,20 +38,15 @@ public class ConversationListener implements Listener {
             var stage = plugin.getQuestManager().getCurrentStage(player, id);
             if (stage.getType() != StageType.CONVERSATION) continue;
 
-            var cid = "c-" + data.getStageCount();
+            var cid = "c-" + (data.getStageCount() - 1);
             if (stage.getData().containsKey(cid)) {
                 var message = stage.getData().get(cid).replace("&", "§").replace("%player%", player.getName());
                 player.sendMessage("");
-                player.sendMessage("§a§l[" + (data.getStageCount() + 1) + "/" + stage.getCount() + "] " + message);
+                player.sendMessage("§a§l[" + (data.getStageCount()) + "/" + stage.getCount() + "] " + message);
                 player.sendMessage("");
                 player.playSound(player.getLocation(), Sound.BLOCK_WOODEN_BUTTON_CLICK_ON, 1, 1);
             }
         }
-        
-        // Add count
-        Map<String, Object> values = Map.of("npc-id", npcid);
-        int excess = plugin.getQuestManager().addCount(player, StageType.CONVERSATION, values, 1);
-        if (excess == -1) return;
 
         // Get message
         Tasks.async(() -> {
