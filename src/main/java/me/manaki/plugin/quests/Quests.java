@@ -66,10 +66,10 @@ public class Quests extends JavaPlugin {
 
     public void load() {
         var pm = Bukkit.getPluginManager();
-        if (pm.isPluginEnabled("Shops")) pm.registerEvents(new ShopListener(this), this);
-        if (pm.isPluginEnabled("SantoryCore")) pm.registerEvents(new SantoryListener(this), this);
-        if (pm.isPluginEnabled("Dungeons")) pm.registerEvents(new DungeonListener(this), this);
-        if (pm.isPluginEnabled("Crafts")) pm.registerEvents(new CraftListener(this), this);
+        pm.registerEvents(new ShopListener(this), this);
+        pm.registerEvents(new SantoryListener(this), this);
+        pm.registerEvents(new DungeonListener(this), this);
+        pm.registerEvents(new CraftListener(this), this);
 
         // Task
         new QuestTask(this).runTaskTimerAsynchronously(this, 0, 20);

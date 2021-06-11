@@ -6,6 +6,7 @@ import me.manaki.plugin.quests.quester.QuestData;
 import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.utils.Utils;
 import mk.plugin.santory.utils.Tasks;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,16 +23,18 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        // First join load
-        if (!plugin.isLoaded()) {
-            plugin.setLoaded(true);
-            plugin.load();
-        }
-        var player = e.getPlayer();
-        Tasks.sync(() -> {
-            plugin.getQuestManager().checkWrongQuests(player);
-            plugin.getQuestManager().checkExpiredQuests(player);
-        }, 50);
+        Bukkit.getScheduler().runTaskLater(Quests.get(), () -> {
+            // First join load
+            if (!plugin.isLoaded()) {
+                plugin.setLoaded(true);
+                plugin.load();
+            }
+            var player = e.getPlayer();
+            Tasks.sync(() -> {
+                plugin.getQuestManager().checkWrongQuests(player);
+                plugin.getQuestManager().checkExpiredQuests(player);
+            }, 50);
+        }, 20);
     }
 
     @EventHandler
