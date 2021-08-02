@@ -82,7 +82,16 @@ public class Quests extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            Questers.saveAndClearCache(player.getName());
+            try {
+                this.getBoardManager().closeBoard(player, false);
+                this.getBoardManager().removeBossbar(player);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            finally {
+                Questers.saveAndClearCache(player.getName());
+            }
         }
     }
 

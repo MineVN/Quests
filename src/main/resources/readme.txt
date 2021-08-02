@@ -83,6 +83,8 @@ Last update: 01/08/2021
     + item-material: String type
 - SKYBATTLE
     + top: Number type
+- SHOPS_ITEM_BUY
+    + item-id: String type
 
 
 **Available command types:

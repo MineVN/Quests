@@ -3,6 +3,7 @@ package me.manaki.plugin.quests.listener.hook;
 import me.manaki.plugin.quests.Quests;
 import me.manaki.plugin.quests.quest.stage.StageType;
 import me.manaki.plugin.quests.quester.Questers;
+import me.manaki.plugin.shops.event.PlayerShopItemBuyEvent;
 import me.manaki.plugin.shops.storage.ItemStorage;
 import mk.plugin.santory.utils.Tasks;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -19,6 +20,15 @@ public class ShopListener implements Listener {
 
     public ShopListener(Quests plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onBuy(PlayerShopItemBuyEvent e) {
+        var p = e.getPlayer();
+        var itemid = e.getItemID();
+
+        Map<String, Object> values = Map.of("item-id", itemid);
+        plugin.getQuestManager().addCount(p, StageType.SHOPS_ITEM_BUY, values, 1);
     }
 
     @EventHandler

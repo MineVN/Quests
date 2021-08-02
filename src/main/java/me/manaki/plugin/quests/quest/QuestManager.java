@@ -51,6 +51,8 @@ public class QuestManager {
             plugin.getBoardManager().openBoard(player, -1, true);
         }
 
+        // Bossbar
+        plugin.getBoardManager().sendBossbar(player);
     }
 
     /*
@@ -121,6 +123,9 @@ public class QuestManager {
             for (Command cmd : plugin.getConfigManager().getOnStageChangeCommands()) {
                 cmd.execute(player, placeholders);
             }
+
+            // Bossbar
+            plugin.getBoardManager().sendBossbar(player);
         }
 
         return Math.max(0, excess);
@@ -145,6 +150,9 @@ public class QuestManager {
 
         // Board
         plugin.getBoardManager().closeBoard(player, false);
+
+        // Bossbar
+        plugin.getBoardManager().removeBossbar(player);
     }
 
     public void cancelQuest(Player player, String id) {

@@ -87,11 +87,21 @@ public class Utils {
         }
     }
 
+    public static String recolorBold(String s) {
+        var regex = "\\*(?<word>[^\\*]+)\\*";
+        var p = Pattern.compile(regex);
+        var m = p.matcher(s);
+        while (m.find()) {
+            var word = m.group("word");
+            s = s.replace("*" + word + "*", "§a§l" + word + "§r");
+        }
+        return s;
+    }
+
     private static final String[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".split("");
     private static final String[] SMALL_CAPS_ALPHABET = "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴩqʀꜱᴛᴜᴠᴡxyᴢ".split("");
 
-    private static String toSmallCaps(String text)
-    {
+    private static String toSmallCaps(String text) {
         text = text.toLowerCase();
         StringBuilder convertedBuilder = new StringBuilder();
         for (char textCharacter : text.toCharArray())

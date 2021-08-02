@@ -2,12 +2,14 @@ package me.manaki.plugin.quests.listener.hook;
 
 import me.manaki.plugin.dungeons.dungeon.event.DungeonFinishEvent;
 import me.manaki.plugin.dungeons.dungeon.event.DungeonMobKilledEvent;
+import me.manaki.plugin.dungeons.dungeon.status.DungeonResult;
 import me.manaki.plugin.quests.Quests;
 import me.manaki.plugin.quests.quest.stage.StageType;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,7 +27,10 @@ public class DungeonListener implements Listener {
         var result = e.getResult().name().toLowerCase();
         var memStart = e.getStatus().getStarters().size();
         var memFinish = e.getStatus().getPlayers().size();
-        for (UUID uuid : e.getStatus().getPlayers()) {
+
+        List<UUID> uuids = e.getResult() == DungeonResult.WIN ? e.getStatus().getPlayers() : e.getStatus().getStarters();
+
+        for (UUID uuid : uuids) {
             var player = Bukkit.getPlayer(uuid);
             var statistic = e.getStatus().getStatistic(player);
             var mobKills = statistic.getMobKilled();

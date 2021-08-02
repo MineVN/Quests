@@ -353,7 +353,27 @@ public enum StageType {
         public void onEnd(Player player, int count, Map<String, String> data) {
 
         }
-    }
+    },
+
+    SHOPS_ITEM_BUY {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("item-id", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
 
 
     ;

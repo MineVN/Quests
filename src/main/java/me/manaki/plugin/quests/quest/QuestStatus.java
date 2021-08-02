@@ -43,7 +43,7 @@ public enum QuestStatus {
                 lore.addAll(quest.getRewardDesc());
             }
             lore.add("");
-            lore.add("§cShift + Click để hủy n.vụ");
+            lore.add("§c§lSHIFT + CLICK §cđể hủy n.vụ");
 
             meta.setLore(lore);
             is.setItemMeta(meta);
@@ -91,7 +91,7 @@ public enum QuestStatus {
             }
 
             lore.add("");
-            lore.add("§aClick để nhận");
+            lore.add("§e§lCLICK §eđể nhận n.vụ");
 
             meta.setLore(lore);
             is.setItemMeta(meta);
