@@ -7,9 +7,11 @@ import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.utils.Utils;
 import mk.plugin.santory.utils.Tasks;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.*;
 
 import java.util.Map;
@@ -19,6 +21,15 @@ public class PlayerListener implements Listener {
     private final Quests plugin;
     public PlayerListener(Quests plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onBreakBlock(BlockBreakEvent e) {
+        var p = e.getPlayer();
+        var b = e.getBlock();
+
+        Map<String, Object> values = Map.of("block-type", b.getType().name(), "world", b.getWorld().getName());
+        plugin.getQuestManager().addCount(p, StageType.BLOCK_BREAK, values, 1);
     }
 
     @EventHandler

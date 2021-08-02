@@ -1,4 +1,4 @@
-Last update: 21/04/2021
+Last update: 01/08/2021
 
 **Quest
 - name
@@ -74,6 +74,13 @@ Last update: 21/04/2021
     + radius: Number type
 - COMMAND_EXECUTE
     + command: String type
+- BLOCK_BREAK
+    + block-type: String type
+    + world: String type
+- MYTHICMOB_KILL
+    + mythicmob-id: String type
+- MARKET_SELL:
+    + item-material: String type
 
 
 **Available command types:

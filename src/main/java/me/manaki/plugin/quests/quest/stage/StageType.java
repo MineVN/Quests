@@ -1,6 +1,7 @@
 package me.manaki.plugin.quests.quest.stage;
 
 import com.google.common.collect.Maps;
+import com.mysql.fabric.xmlrpc.base.Value;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.task.hook.PlaceholderTask;
@@ -258,6 +259,67 @@ public enum StageType {
         public Map<String, ValueType> getDefaultDataModel() {
             Map<String, ValueType> m = Maps.newLinkedHashMap();
             m.put("command", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
+
+    BLOCK_BREAK {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("block-type", ValueType.STRING);
+            m.put("world", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
+
+    MYTHICMOB_KILL {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("mythicmob-id", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    },
+
+    MARKET_SELL {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("item-material", ValueType.STRING);
 
             return m;
         }
