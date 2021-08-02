@@ -72,6 +72,7 @@ public class Quests extends JavaPlugin {
         pm.registerEvents(new CraftListener(this), this);
         pm.registerEvents(new MythicMobListener(this), this);
         pm.registerEvents(new MarketListener(this), this);
+        pm.registerEvents(new SkybattleListener(this), this);
 
         // Task
         new QuestTask(this).runTaskTimerAsynchronously(this, 0, 20);

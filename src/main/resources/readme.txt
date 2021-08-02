@@ -81,6 +81,8 @@ Last update: 01/08/2021
     + mythicmob-id: String type
 - MARKET_SELL:
     + item-material: String type
+- SKYBATTLE
+    + top: Number type
 
 
 **Available command types:
