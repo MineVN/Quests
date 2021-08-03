@@ -32,6 +32,8 @@ Last update: 01/08/2021
     + Example: > 20/10/2020
 - LEVEL
     + Value: Number type
+- NOT_HAVE_PERM
+    + Value: String type
 
 **Available stage types:
 - PLACEHOLDER_CHANGE

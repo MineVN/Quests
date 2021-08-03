@@ -75,6 +75,17 @@ public enum RequirementType {
             return new DataValue(this.getDefault().getType(), v).compare(player.getLevel());
         }
     },
+    NOT_HAVE_PERM {
+        @Override
+        public DataValue getDefault() {
+            return new DataValue(ValueType.STRING, "member.20");
+        }
+
+        @Override
+        public boolean check(Player player, String v) {
+            return !player.hasPermission(v);
+        }
+    }
     
     ;
     
