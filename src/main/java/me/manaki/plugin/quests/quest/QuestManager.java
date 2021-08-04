@@ -82,7 +82,7 @@ public class QuestManager {
                 addCount(player, questID, amount);
             }
         }
-        return false;
+        return true;
     }
 
     public int addCount(Player player, String questID, int amount) {
