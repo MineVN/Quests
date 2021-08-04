@@ -58,9 +58,10 @@ public class Quests extends JavaPlugin {
         // Placeholder
         new QuestPlaceholder().register();
 
-        // Check wrong quests
+        // Check wrong quests + board
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.getQuestManager().checkWrongQuests(player);
+            this.getQuestManager().checkMainQuest(player);
         }
     }
 

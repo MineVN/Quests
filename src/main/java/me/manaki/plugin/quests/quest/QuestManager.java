@@ -287,5 +287,20 @@ public class QuestManager {
         quester.save();
     }
 
+    public boolean checkMainQuest(Player p) {
+        String mainQuest = null;
+        var quester = Questers.get(p.getName());
+        for (String id : quester.getCurrentQuests().keySet()) {
+            if (Quests.get().getConfigManager().getFeatherboardQuests().contains(id)) mainQuest = id;
+        }
+        if (mainQuest == null) return false;
+
+        var stage = Quests.get().getQuestManager().getCurrentStage(p, mainQuest);
+
+        Quests.get().getBoardManager().sendBossbar(p);
+        Quests.get().getBoardManager().openBoard(p, -1, false);
+
+        return true;
+    }
 
 }

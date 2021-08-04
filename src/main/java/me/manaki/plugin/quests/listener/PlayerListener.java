@@ -34,18 +34,23 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
+        var player = e.getPlayer();
+        // First join load
         Bukkit.getScheduler().runTaskLater(Quests.get(), () -> {
-            // First join load
             if (!plugin.isLoaded()) {
                 plugin.setLoaded(true);
                 plugin.load();
             }
-            var player = e.getPlayer();
             Tasks.sync(() -> {
                 plugin.getQuestManager().checkWrongQuests(player);
                 plugin.getQuestManager().checkExpiredQuests(player);
             }, 50);
         }, 20);
+
+        // Main quest check
+        Bukkit.getScheduler().runTaskLater(Quests.get(), () -> {
+            plugin.getQuestManager().checkMainQuest(player);
+        }, 150);
     }
 
     @EventHandler
