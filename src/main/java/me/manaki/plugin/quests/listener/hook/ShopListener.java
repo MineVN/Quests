@@ -42,7 +42,7 @@ public class ShopListener implements Listener {
         if (itemid == null) return;
 
         Map<String, Object> values = Map.of("npc-id", npcid, "item-id", itemid);
-        int excess = plugin.getQuestManager().addCount(player, StageType.SHOPS_ITEM_DELIVER, values, is.getAmount());
+        int excess = plugin.getQuestManager().addCountWithExcess(player, StageType.SHOPS_ITEM_DELIVER, values, is.getAmount());
         // -1 = fail
         if (excess == -1) return;
 

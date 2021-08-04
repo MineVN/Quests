@@ -60,7 +60,8 @@ public class QuestManager {
     0 -> Added but not excess
     0+ -> Has excess
      */
-    public int addCount(Player player, StageType type, Map<String, Object> values, int amount) {
+
+    public int addCountWithExcess(Player player, StageType type, Map<String, Object> values, int amount) {
         var quester = Questers.get(player.getName());
         for (Map.Entry<String, QuestData> e : quester.getCurrentQuests().entrySet()) {
             var questID = e.getKey();
@@ -70,6 +71,18 @@ public class QuestManager {
             }
         }
         return -1;
+    }
+
+    public boolean addCount(Player player, StageType type, Map<String, Object> values, int amount) {
+        var quester = Questers.get(player.getName());
+        for (Map.Entry<String, QuestData> e : quester.getCurrentQuests().entrySet()) {
+            var questID = e.getKey();
+            var stage = getCurrentStage(player, questID);
+            if (stage.getType() == type && stage.match(values)) {
+                addCount(player, questID, amount);
+            }
+        }
+        return false;
     }
 
     public int addCount(Player player, String questID, int amount) {

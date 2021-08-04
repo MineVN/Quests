@@ -27,8 +27,8 @@ public class ConversationListener implements Listener {
         
         // Add count
         Map<String, Object> values = Map.of("npc-id", npcid);
-        int excess = plugin.getQuestManager().addCount(player, StageType.CONVERSATION, values, 1);
-        if (excess == -1) return;
+        var success = plugin.getQuestManager().addCount(player, StageType.CONVERSATION, values, 1);
+        if (!success) return;
 
         // Talk
         var quester = Questers.get(player.getName());
