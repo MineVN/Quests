@@ -12,6 +12,7 @@ softdepend:
   - Citizens
   - PlaceholderAPI
   - SkyBattleClient
+  - Market
 commands:
   quests:
     description: Quests's command

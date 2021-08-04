@@ -74,15 +74,17 @@ public class QuestManager {
     }
 
     public boolean addCount(Player player, StageType type, Map<String, Object> values, int amount) {
+        boolean check = false;
         var quester = Questers.get(player.getName());
         for (Map.Entry<String, QuestData> e : quester.getCurrentQuests().entrySet()) {
             var questID = e.getKey();
             var stage = getCurrentStage(player, questID);
             if (stage.getType() == type && stage.match(values)) {
                 addCount(player, questID, amount);
+                check = true;
             }
         }
-        return true;
+        return check;
     }
 
     public int addCount(Player player, String questID, int amount) {
