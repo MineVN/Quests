@@ -3,6 +3,7 @@ package me.manaki.plugin.quests.command;
 import com.google.common.collect.Lists;
 import com.google.gson.GsonBuilder;
 import me.manaki.plugin.quests.Quests;
+import me.manaki.plugin.quests.quester.QuestData;
 import me.manaki.plugin.quests.quester.Questers;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class AdminCommand implements CommandExecutor {
 
@@ -29,6 +31,19 @@ public class AdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload")) {
                 plugin.getConfigManager().reload();
                 sender.sendMessage("§aAll reloaded!");
+            }
+
+            else if (args[0].equalsIgnoreCase("info")) {
+                var quester = Questers.get(args[1]);
+                sender.sendMessage("§aQuestpoints: §f" + quester.getQuestPoints());
+                sender.sendMessage("§aCurrent quests:");
+                for (Map.Entry<String, QuestData> e : quester.getCurrentQuests().entrySet()) {
+                    sender.sendMessage("§f  - " + e.getKey() + ": " + new GsonBuilder().create().toJson(e.getValue()));
+                }
+                sender.sendMessage("§aCompleted quests:");
+                for (Map.Entry<String, String> e : quester.getCompletedQuests().entrySet()) {
+                    sender.sendMessage("§f - " + e.getKey() + ": " + e.getValue());
+                }
             }
 
             else if (args[0].equalsIgnoreCase("debugquest")) {
@@ -108,6 +123,7 @@ public class AdminCommand implements CommandExecutor {
         sender.sendMessage("");
         sender.sendMessage("§6§lQuests by MankaiStep - Minevn.net");
         sender.sendMessage("§e/quests reload");
+        sender.sendMessage("§e/quests info <*player>");
         sender.sendMessage("§e/quests debugquest <*id>");
         sender.sendMessage("§e/quests debugcategory <*id>");
         sender.sendMessage("§e/quests give <*id> <*player> <*override>");

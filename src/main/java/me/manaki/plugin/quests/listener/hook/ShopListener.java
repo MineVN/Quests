@@ -39,7 +39,7 @@ public class ShopListener implements Listener {
         if (is.getType() == Material.AIR) return;
 
         var itemid = ItemStorage.getID(is);
-        if (itemid == null) return;
+        if (itemid == null) itemid = is.getType().name();
 
         Map<String, Object> values = Map.of("npc-id", npcid, "item-id", itemid);
         int excess = plugin.getQuestManager().addCountWithExcess(player, StageType.SHOPS_ITEM_DELIVER, values, is.getAmount());

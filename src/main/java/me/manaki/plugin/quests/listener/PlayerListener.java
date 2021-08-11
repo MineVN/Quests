@@ -7,11 +7,11 @@ import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.utils.Utils;
 import mk.plugin.santory.utils.Tasks;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 import java.util.Map;
@@ -21,6 +21,27 @@ public class PlayerListener implements Listener {
     private final Quests plugin;
     public PlayerListener(Quests plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onPvP(PlayerDeathEvent e) {
+        var target = e.getEntity();
+        var killer = target.getKiller();
+        if (killer != null) {
+            Map<String, Object> values = Map.of("player-name", target.getName());
+            plugin.getQuestManager().addCount(killer, StageType.PLAYER_KILL, values, 1);
+        }
+    }
+
+    @EventHandler
+    public void onFishing(PlayerFishEvent e) {
+        var p = e.getPlayer();
+        var caught = e.getCaught();
+        if (caught instanceof Item) {
+            var type = ((Item) e.getCaught()).getItemStack().getType();
+            Map<String, Object> values = Map.of("item-type", type.name());
+            plugin.getQuestManager().addCount(p, StageType.FISHING, values, 1);
+        }
     }
 
     @EventHandler
