@@ -80,18 +80,26 @@ public class CategoryManager {
     }
 
     private List<String> generateAvailables(Category category) {
-        if (!category.isRandomEnable()) return category.getList();
-        var ran = category.getRandom();
-
         List<String> result = Lists.newArrayList();
-        var clone = new ArrayList<> (category.getList());
-        if (clone.size() < ran) return clone;
+        for (Map.Entry<String, QuestGroup> e : category.getQuestGroups().entrySet()) {
+            var gr = e.getValue();
+            int ran = gr.getRandom();
 
-        while (ran != 0) {
-            ran--;
-            int i = new Random().nextInt(clone.size());
-            result.add(clone.get(i));
-            clone.remove(i);
+            // random -1 == no random
+            if (ran == -1) {
+                result.addAll(gr.getQuests());
+                continue;
+            }
+
+            // Randomize
+            var clone = new ArrayList<> (gr.getQuests());
+            if (clone.size() < ran) return clone;
+            while (ran != 0) {
+                ran--;
+                int i = new Random().nextInt(clone.size());
+                result.add(clone.get(i));
+                clone.remove(i);
+            }
         }
 
         Collections.sort(result);
@@ -101,7 +109,7 @@ public class CategoryManager {
 
     public String getCategory(String questID) {
         for (Map.Entry<String, Category> e : plugin.getConfigManager().getCategories().entrySet()) {
-            if (e.getValue().getList().contains(questID)) return e.getKey();
+            if (e.getValue().containsQuest(questID)) return e.getKey();
         }
         return null;
     }

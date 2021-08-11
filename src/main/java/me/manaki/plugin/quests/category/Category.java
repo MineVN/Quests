@@ -1,42 +1,20 @@
 package me.manaki.plugin.quests.category;
 
-
-import java.util.List;
+import java.util.Map;
 
 public class Category {
 
-    private String name;
-    private boolean cooldownEnable;
-    private CooldownType cooldown;
+    private final String name;
+    private final boolean cooldownEnable;
+    private final CooldownType cooldown;
 
-    private boolean randomEnable;
-    private int random;
+    private final Map<String, QuestGroup> questGroups;
 
-    private List<String> list;
-
-    public Category(String name, boolean cooldownEnable, CooldownType cooldown, boolean randomEnable, int random, List<String> list) {
+    public Category(String name, boolean cooldownEnable, CooldownType cooldown, Map<String, QuestGroup> questGroups) {
         this.name = name;
         this.cooldownEnable = cooldownEnable;
         this.cooldown = cooldown;
-        this.randomEnable = randomEnable;
-        this.random = random;
-        this.list = list;
-    }
-
-    public Category(String name, boolean allowRedo, List<String> list) {
-        this(name, false, null, false, -1, list);
-    }
-
-    public Category(String name, boolean allowRedo, CooldownType cooldown, List<String> list) {
-        this(name, true, cooldown, false, -1, list);
-    }
-
-    public Category(String name, boolean allowRedo, int random, List<String> list) {
-        this(name, false, null, true, random, list);
-    }
-
-    public Category(String name, boolean allowRedo, CooldownType cooldown, int random, List<String> list) {
-        this(name, true, cooldown, true, random, list);
+        this.questGroups = questGroups;
     }
 
     public String getName() {
@@ -55,15 +33,15 @@ public class Category {
         return cooldown;
     }
 
-    public boolean isRandomEnable() {
-        return randomEnable;
+    public Map<String, QuestGroup> getQuestGroups() {
+        return questGroups;
     }
 
-    public int getRandom() {
-        return random;
+    public boolean containsQuest(String id) {
+        for (QuestGroup gr : this.questGroups.values()) {
+            if (gr.getQuests().contains(id)) return true;
+        }
+        return false;
     }
 
-    public List<String> getList() {
-        return list;
-    }
 }

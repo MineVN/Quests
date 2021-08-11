@@ -2,6 +2,7 @@ package me.manaki.plugin.quests.config;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import me.manaki.plugin.quests.category.QuestGroup;
 import me.manaki.plugin.quests.quest.Quest;
 import me.manaki.plugin.quests.quest.requirement.Requirement;
 import me.manaki.plugin.quests.quest.requirement.RequirementType;
@@ -213,11 +214,16 @@ public class ConfigManager {
         var name = section.getString("name");
         boolean cooldownEnable = section.getBoolean("cooldown.enable");
         var cooldownType = section.contains("cooldown.type") ? CooldownType.valueOf(section.getString("cooldown.type")) : null;
-        boolean randomEnable = section.getBoolean("random.enable");
-        var random = section.getInt("random.amount");
-        var list = section.getStringList("list");
 
-        return new Category(name, cooldownEnable, cooldownType, randomEnable, random, list);
+        Map<String, QuestGroup> questGroups = Maps.newHashMap();
+        for (String grid : section.getConfigurationSection("list").getKeys(false)) {
+            int random = section.getInt("list." + grid + ".random");
+            var quests = section.getStringList("list." + grid + ".quests");
+            var group = new QuestGroup(random, quests);
+            questGroups.put(grid, group);
+        }
+
+        return new Category(name, cooldownEnable, cooldownType, questGroups);
     }
 
     public List<Command> getOnStageChangeCommands() {

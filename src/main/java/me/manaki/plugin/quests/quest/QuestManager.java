@@ -251,7 +251,7 @@ public class QuestManager {
 
         // Have in category
         var category = plugin.getConfigManager().getCategory(categoryID);
-        if (category.isAllowRedo() && category.getList().contains(id)) {
+        if (category.isAllowRedo() && category.containsQuest(id)) {
             if (category.getCooldown().enough(Utils.parse(quester.getCompletedQuests().get(id)), LocalDate.now())) return QuestStatus.CAN_DO;
         }
 
