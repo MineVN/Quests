@@ -2,6 +2,7 @@ package me.manaki.plugin.quests.config;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import me.manaki.plugin.quests.Quests;
 import me.manaki.plugin.quests.category.QuestGroup;
 import me.manaki.plugin.quests.quest.Quest;
 import me.manaki.plugin.quests.quest.requirement.Requirement;
@@ -71,6 +72,15 @@ public class ConfigManager {
         quests.clear();
         for (File file : folder.listFiles()) {
             var id = file.getName().replace(".yml", "");
+            Quest quest = null;
+            try {
+                quest = loadQuest(id);
+            }
+            catch (Exception e) {
+                Quests.get().getLogger().warning("Quest id " + id + " error!");
+                e.printStackTrace();
+                continue;
+            }
             quests.put(id, loadQuest(id));
         }
 

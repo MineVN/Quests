@@ -81,6 +81,8 @@ public class CategoryManager {
 
     private List<String> generateAvailables(Category category) {
         List<String> result = Lists.newArrayList();
+
+        boolean sort = false;
         for (Map.Entry<String, QuestGroup> e : category.getQuestGroups().entrySet()) {
             var gr = e.getValue();
             int ran = gr.getRandom();
@@ -100,9 +102,10 @@ public class CategoryManager {
                 result.add(clone.get(i));
                 clone.remove(i);
             }
+            sort = true;
         }
 
-        Collections.sort(result);
+        if (sort) Collections.sort(result);
 
         return result;
     }
