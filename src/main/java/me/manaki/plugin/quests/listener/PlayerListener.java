@@ -7,6 +7,7 @@ import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.utils.Utils;
 import mk.plugin.santory.utils.Tasks;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,6 +36,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onFishing(PlayerFishEvent e) {
+        if (e.getState() != PlayerFishEvent.State.CAUGHT_FISH) return;
         var p = e.getPlayer();
         var caught = e.getCaught();
         if (caught instanceof Item) {
