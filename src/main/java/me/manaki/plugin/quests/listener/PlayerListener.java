@@ -1,13 +1,13 @@
 package me.manaki.plugin.quests.listener;
 
 import me.manaki.plugin.quests.Quests;
+import me.manaki.plugin.quests.event.QuestTakeEvent;
 import me.manaki.plugin.quests.quest.stage.StageType;
 import me.manaki.plugin.quests.quester.QuestData;
 import me.manaki.plugin.quests.quester.Questers;
 import me.manaki.plugin.quests.utils.Utils;
 import mk.plugin.santory.utils.Tasks;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,6 +22,15 @@ public class PlayerListener implements Listener {
     private final Quests plugin;
     public PlayerListener(Quests plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onTakeQuest(QuestTakeEvent e) {
+        var p = e.getPlayer();
+        var id = e.getQuestId();
+
+        Map<String, Object> values = Map.of("quest-id", id);
+        plugin.getQuestManager().addCount(p, StageType.QUEST_TAKE, values, 1);
     }
 
     @EventHandler

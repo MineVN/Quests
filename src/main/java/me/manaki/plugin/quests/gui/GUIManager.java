@@ -2,6 +2,7 @@ package me.manaki.plugin.quests.gui;
 
 import com.google.common.collect.Lists;
 import me.manaki.plugin.quests.Quests;
+import me.manaki.plugin.quests.event.QuestTakeEvent;
 import me.manaki.plugin.quests.quest.QuestStatus;
 import me.manaki.plugin.quests.quester.Questers;
 import mk.plugin.santory.utils.Tasks;
@@ -85,6 +86,9 @@ public class GUIManager {
             if (status == QuestStatus.CAN_DO) {
                 plugin.getQuestManager().give(player, questID, false);
                 open(player, holder.getQuests(), holder.getTitle(), holder.getCurrentPage());
+
+                // Call event
+                Bukkit.getPluginManager().callEvent(new QuestTakeEvent(player, questID));
             }
             else if (status == QuestStatus.IN_PROGRESS && e.getClick() == ClickType.SHIFT_LEFT) {
                 // Check if no quit quests

@@ -87,6 +87,12 @@ Last update: 01/08/2021
     + top: Number type
 - SHOPS_ITEM_BUY
     + item-id: String type
+- FIHSING
+    + item-type: String type
+- PLAYER_KILL
+    + player-name: String type
+- QUEST_TAKE
+    + quest-id: String type
 
 
 **Available command types:
@@ -121,6 +127,7 @@ Last update: 01/08/2021
     + *: all
     + and;v1;v2;v3: v1 and v2
     + or;v1;v2;v3: v1 or v2 or v3
+    + startwith;s1;s2;s3 start with s1 or s2 or s3
 - Number type:
     + 0: =0
     + >0: >0

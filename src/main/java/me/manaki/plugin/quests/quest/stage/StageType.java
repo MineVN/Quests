@@ -414,6 +414,26 @@ public enum StageType {
         }
     },
 
+    QUEST_TAKE {
+        @Override
+        public Map<String, ValueType> getDefaultDataModel() {
+            Map<String, ValueType> m = Maps.newLinkedHashMap();
+            m.put("quest-id", ValueType.STRING);
+
+            return m;
+        }
+
+        @Override
+        public void onStart(Player player, int count, Map<String, String> data) {
+
+        }
+
+        @Override
+        public void onEnd(Player player, int count, Map<String, String> data) {
+
+        }
+    }
+
     ;
 
     public abstract Map<String, ValueType> getDefaultDataModel();

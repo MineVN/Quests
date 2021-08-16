@@ -1,13 +1,6 @@
 package me.manaki.plugin.quests.utils.data;
 
-import com.google.common.collect.Lists;
-import com.google.gson.stream.JsonToken;
-import org.apache.logging.log4j.core.appender.routing.Route;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 public enum ValueType {
 
@@ -32,30 +25,41 @@ public enum ValueType {
             }
 
             // AND
-            if (type.equals("and")) {
-                if (objects.length != a.length - 1) return false;
-                for (int i = 1 ; i < a.length ; i++) {
-                    if (objects.length < i) return false;
-                    boolean contain = false;
-                    for (Object object : objects) {
-                        if (object.equals(a[i])) {
-                            contain = true;
-                            break;
+            switch (type) {
+                case "and":
+                    if (objects.length != a.length - 1) return false;
+                    for (int i = 1; i < a.length; i++) {
+                        if (objects.length < i) return false;
+                        boolean contain = false;
+                        for (Object object : objects) {
+                            if (object.equals(a[i])) {
+                                contain = true;
+                                break;
+                            }
+                        }
+                        if (!contain) return false;
+                    }
+                    return true;
+
+
+                // OR
+                case "or":
+                    for (int i = 1; i < a.length; i++) {
+                        for (Object object : objects) {
+                            if (object.equals(a[i])) return true;
                         }
                     }
-                    if (!contain) return false;
-                }
-                return true;
-            }
+                    return false;
 
-            // OR
-            else if (type.equals("or")) {
-                for (int i = 1 ; i < a.length ; i++) {
-                    for (Object object : objects) {
-                        if (object.equals(a[i])) return true;
+
+                // START WITH
+                case "startwith":
+                    for (int i = 1; i < a.length; i++) {
+                        for (Object object : objects) {
+                            if (object.toString().startsWith(a[i])) return true;
+                        }
                     }
-                }
-                return false;
+                    return false;
             }
 
             return false;
